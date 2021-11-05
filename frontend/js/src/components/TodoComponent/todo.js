@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import './todo.scss';
@@ -61,18 +61,11 @@ const TaskTracker = styled.div`
 
 const Todos = props => {
   const el = useRef(null);
-  const [todos, setTodos] = useState([]);
+  const { todos } = props;
   const commentForm = useRef(null);
-  useEffect(async () => {
-    props.getTasks(data => {console.log(data)
-      setTodos(data);
-    });
+  useEffect(() => {
+    props.getTasks();
   }, []);
-  // useEffect(async () => {
-  //   if (todos.length !== 0) {
-
-  //   }
-  // }, [todos])
   const handleSubmit = (e) => {
     e.preventDefault();
     props.addTasks(el.current.value);
